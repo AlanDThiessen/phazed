@@ -23,7 +23,9 @@ var FILE_PATH = '~/games/';
         init: GameInit,
         read: ReadGameFile,
         save: WriteGameFile,
-        addPlayer: AddPlayer
+        addPlayer: AddPlayer,
+        getPlayers: GetPlayersArray,
+        getLeadPlayer: GetPlayerInLead
     };
 
 
@@ -55,6 +57,41 @@ var FILE_PATH = '~/games/';
         }
 
         return player;
+    }
+
+
+    function GetPlayersArray() {
+        var players = [];
+
+        for(var player in this.players) {
+            if(this.players.hasOwnProperty(player)) {
+                players.push(this.players[player]);
+            }
+        }
+
+
+        return players.sort(PlayerSort);
+    }
+
+
+    function GetPlayerInLead() {
+        var players = this.getPlayers();
+        return players[0];
+    }
+
+
+    /**
+     * @param a
+     * @param b
+     * @returns {boolean}
+     */
+    function PlayerSort(a, b) {
+        if(a.phase == b.phase) {
+            return a.score < b.score;
+        }
+        else {
+            return a.phase < b.phase;
+        }
     }
 
 
