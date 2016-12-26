@@ -4,7 +4,7 @@
     'use strict';
 
     var fs = require('fs');
-    var FILE_PATH = '~/games/';
+    var FILE_PATH = './games/';
 
     /*************************************************************************
      * Interface functions
@@ -12,6 +12,7 @@
     function LoadGame(gameId) {
         var game = NewGame({'gameId': gameId});
         game.read();
+        return game;
     }
 
 
@@ -35,8 +36,12 @@
         this.gameId = defObj.gameId;
         this.players = {};
 
-        for(var playerCntr = 0; playerCntr < defObj.players.length; playerCntr++ ) {
-            this.AddPlayer(defObj.players[playerCntr]);
+        if(typeof(defObj.players) != 'undefined') {
+            for(var player in defObj.players) {
+                if(defObj.players.hasOwnProperty(player)) {
+                    this.AddPlayer(defObj.players[player]);
+                }
+            }
         }
     }
 
@@ -101,7 +106,7 @@
         var filePath = FILE_PATH + this.gameId + '.game';
 
         if(fs.existsSync(filePath)) {
-            this.GameInit(JSON.parse(fs.readFileSync(filePath)));
+            this.init(JSON.parse(fs.readFileSync(filePath)));
         }
     }
 

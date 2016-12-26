@@ -3,7 +3,7 @@
 (function() {
     'use strict';
 
-    var phaseScore = require('PhaseScore.js');
+    var phaseScore = require('./PhaseScore.js');
 
     var HANDLERS = {
         NewGame: HandleNewGame
@@ -12,8 +12,7 @@
 
     var AlexaResponse = {
         'version': '1.0',
-        'sessionAttributes': {
-        },
+        'sessionAttributes': {},
         'response': {
             'shouldSessionEnd': false
         }
@@ -26,6 +25,8 @@
         var intent = body.request.intent.name;
         var response;
 
+        console.log('Intent: ' + intent);
+
         if(typeof(HANDLERS[intent]) != 'undefined') {
             response = HANDLERS[intent](game);
         }
@@ -33,19 +34,25 @@
             response = DefaultHandlerNoIntent();
         }
 
-        return response;
+        return JSON.stringify(response);
     }
 
 
     function DefaultHandlerNoIntent() {
         var response = Object.create(AlexaResponse);
         AddSpeech(response, "Please repeat your command.  You can say New Game, Add Player, or Get Player Score, for example.");
+        return response;
     }
 
 
     function HandleNewGame(game) {
-        game.init(game.gameId);
+        game.init({'gameId': game.gameId});
+        game.save();
+        var resp = AlexaResponse;
+        AddSpeech(resp, "A new game has been created");
+        return resp;
     }
+
 
 
     function AddSpeech(response, text) {
