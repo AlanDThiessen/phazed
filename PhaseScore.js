@@ -1,9 +1,11 @@
 
-var fs = require('fs');
-
-var FILE_PATH = '~/games/';
 
 (function() {
+    'use strict';
+
+    var fs = require('fs');
+    var FILE_PATH = '~/games/';
+
     /*************************************************************************
      * Interface functions
      *************************************************************************/
