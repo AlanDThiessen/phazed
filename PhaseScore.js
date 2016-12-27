@@ -6,6 +6,19 @@
     var fs = require('fs');
     var FILE_PATH = './games/';
 
+    var PHASES = {
+        1: "2 sets of 3",
+        2: "1 set of 3 and 1 run of 4",
+        3: "1 set of 4 and 1 run of 4",
+        4: "1 run of 7",
+        5: "1 run of 8",
+        6: "1 run of 9",
+        7: "2 sets of 4",
+        8: "7 cards or one color",
+        9: "1 set of 5 and 1 set of 2",
+        10: "1 set of 5 and 1 set of 3"
+    };
+
     /*************************************************************************
      * Interface functions
      *************************************************************************/
@@ -13,6 +26,17 @@
         var game = NewGame({'gameId': gameId});
         game.read();
         return game;
+    }
+
+
+    function GetPhaseInfo(phase) {
+        console.log(phase);
+        if((phase > 0) && (phase <= 10)) {
+            return PHASES[phase];
+        }
+        else {
+            return 'phase not found';
+        }
     }
 
 
@@ -39,7 +63,7 @@
         if(typeof(defObj.players) != 'undefined') {
             for(var player in defObj.players) {
                 if(defObj.players.hasOwnProperty(player)) {
-                    this.AddPlayer(defObj.players[player]);
+                    this.addPlayer(defObj.players[player]);
                 }
             }
         }
@@ -94,7 +118,7 @@
      */
     function PlayerSort(a, b) {
         if(a.phase == b.phase) {
-            return a.score < b.score;
+            return a.score > b.score;
         }
         else {
             return a.phase < b.phase;
@@ -135,6 +159,8 @@
 
     function InitPlayer(defObj) {
         this.name = defObj.name || '';
+        this.phase = defObj.phase || 1;
+        this.score = defObj.score || 0;
     }
 
 
@@ -153,7 +179,7 @@
 
 
     function UpPhase() {
-        if(this.phase < 10) {
+        if(this.phase < 11) {
             this.phase++;
         }
     }
@@ -165,7 +191,8 @@
 
 
     module.exports = {
-        LoadGame: LoadGame
+        LoadGame: LoadGame,
+        GetPhaseInfo: GetPhaseInfo
     }
 
 })();
