@@ -8,6 +8,8 @@
     var HANDLERS = {
         NewGame: HandleNewGame,
         AddPlayer: HandleNewPlayer,
+        RemovePlayer: HandlerRemovePlayer,
+        ListPlayers: HandleListPlayers,
         SetPhase: HandlerSetPhase,
         SetScore: HandlerSetScore,
         AddScore: HandlerAddScore,
@@ -33,7 +35,7 @@
         var intent = body.request.intent;
         var response;
 
-        console.log('Intent: ' + intent.name);
+        console.log('Intent: ' + intent);
 
         if(typeof(HANDLERS[intent.name]) != 'undefined') {
             response = HANDLERS[intent.name](game, intent);
@@ -67,6 +69,38 @@
         game.save();
         var resp = AlexaResponse;
         AddSpeech(resp, "Player " + player.name + ' has been added to the game on phase ' + player.phase + ' and score ' + player.score);
+        return resp;
+    }
+
+
+
+    function HandlerRemovePlayer(game, intent) {
+        var player = game.players[intent.slots.Player.value];
+        var resp = AlexaResponse;
+
+        if(typeof(player) == 'undefined') {
+            AddSpeech(resp, "Player " + intent.slots.Player.value + ' was not found in the game');
+        }
+        else {
+            game.removePlayer(player.name);
+            game.save();
+            AddSpeech(resp, player.name + ' has been removed from the game');
+        }
+
+        return resp;
+    }
+
+
+    function HandleListPlayers(game, intent) {
+        var players = game.getPlayers();
+        var playerNames = [];
+        var resp = AlexaResponse;
+
+        players.forEach(function(player) {
+            playerNames.push(player.name);
+        });
+
+        AddSpeech(resp, "Players, in order of score, are: " + playerNames.join(', '));
         return resp;
     }
 

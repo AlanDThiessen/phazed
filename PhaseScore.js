@@ -51,6 +51,7 @@
         read: ReadGameFile,
         save: WriteGameFile,
         addPlayer: AddPlayer,
+        removePlayer: RemovePlayer,
         getPlayers: GetPlayersArray,
         getLeadPlayer: GetPlayerInLead
     };
@@ -88,6 +89,13 @@
         }
 
         return player;
+    }
+
+
+    function RemovePlayer(name) {
+        if(typeof(this.players[name]) != 'undefined') {
+            delete this.players[name];
+        }
     }
 
 
@@ -137,7 +145,7 @@
 
     function WriteGameFile() {
         var filePath = FILE_PATH + this.gameId + '.game';
-        fs.writeFileSync(filePath, JSON.stringify(this));
+        fs.writeFileSync(filePath, JSON.stringify(this, null, 3));
     }
 
 
