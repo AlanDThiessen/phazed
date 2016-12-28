@@ -1,0 +1,97 @@
+{
+  "intents": [
+    {
+      "intent": "NewGame"
+    },
+    {
+      "intent": "AddPlayer",
+      "slots": [
+        {
+          "name": "Player",
+          "type": "AMAZON.US_FIRST_NAME"
+        }
+      ]
+    },
+    {
+      "intent": "RemovePlayer",
+      "slots": [
+        {
+          "name": "Player",
+          "type": "AMAZON.US_FIRST_NAME"
+        }
+      ]
+    },
+    {
+      "intent": "SetPhase",
+      "slots": [
+        {
+          "name": "Player",
+          "type": "AMAZON.US_FIRST_NAME"
+        },
+        {
+          "name": "Phase",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
+    {
+      "intent": "UpPhase",
+      "slots": [
+        {
+          "name": "Player",
+          "type": "AMAZON.US_FIRST_NAME"
+        }
+      ]
+    },
+    {
+      "intent": "SetScore",
+      "slots": [
+        {
+          "name": "Player",
+          "type": "AMAZON.US_FIRST_NAME"
+        },
+        {
+          "name": "Score",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
+    {
+      "intent": "AddScore",
+      "slots": [
+        {
+          "name": "Player",
+          "type": "AMAZON.US_FIRST_NAME"
+        },
+        {
+          "name": "Score",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
+    {
+      "intent": "GetScore",
+      "slots": [
+        {
+          "name": "Player",
+          "type": "AMAZON.US_FIRST_NAME"
+        }
+      ]
+    },
+    {
+      "intent": "ListPlayers"
+    },
+    {
+      "intent": "GetLeader"
+    },
+    {
+      "intent": "GetPhaseInfo",
+      "slots": [
+        {
+          "name": "Phase",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+NewGame Create new game
+NewGame New Game
+AddPlayer Add player {Player}
+AddPlayer Add {Player} to the game
+RemovePlayer Remove {Player} from the game
+ListPlayers Who is in the game
+ListPlayers List players
+SetPhase Set phase for {Player} to {Phase}
+SetPhase Set {Player} to phase {Phase}
+SetScore Set score for {Player} to {Score}
+AddScore Add {Score} points to {Player}
+AddScore Give {Score} points to {Player}
+UpPhase {Player} has phased
+GetScore How many points does {Player} have
+GetScore What score does {Player} have
+GetScore What phase is {Player} on
+GetScore Get score for {Player}
+GetLeader Who is winning
+GetLeader Who is in the lead
+GetPhaseInfo What do I need to phase {Phase}
