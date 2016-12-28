@@ -8,15 +8,15 @@
     var HANDLERS = {
         NewGame: HandleNewGame,
         AddPlayer: HandleNewPlayer,
-        RemovePlayer: HandlerRemovePlayer,
+        RemovePlayer: HandleRemovePlayer,
         ListPlayers: HandleListPlayers,
-        SetPhase: HandlerSetPhase,
-        SetScore: HandlerSetScore,
-        AddScore: HandlerAddScore,
-        UpPhase: HandlerUpPhase,
-        GetScore: HandlerGetScore,
-        GetLeader: HandlerGetLeader,
-        GetPhaseInfo: HandlerGetPhaseInfo
+        SetPhase: HandleSetPhase,
+        SetScore: HandleSetScore,
+        AddScore: HandleAddScore,
+        UpPhase: HandleUpPhase,
+        GetScore: HandleGetScore,
+        GetLeader: HandleGetLeader,
+        GetPhaseInfo: HandleGetPhaseInfo
     };
 
 
@@ -74,7 +74,7 @@
 
 
 
-    function HandlerRemovePlayer(game, intent) {
+    function HandleRemovePlayer(game, intent) {
         var player = game.players[intent.slots.Player.value];
         var resp = AlexaResponse;
 
@@ -105,7 +105,7 @@
     }
 
 
-    function HandlerSetPhase(game, intent) {
+    function HandleSetPhase(game, intent) {
         var player = game.players[intent.slots.Player.value];
         var resp = AlexaResponse;
 
@@ -122,7 +122,7 @@
     }
 
 
-    function HandlerSetScore(game, intent) {
+    function HandleSetScore(game, intent) {
         var player = game.players[intent.slots.Player.value];
         var resp = AlexaResponse;
 
@@ -139,7 +139,7 @@
     }
 
 
-    function HandlerAddScore(game, intent) {
+    function HandleAddScore(game, intent) {
         var player = game.players[intent.slots.Player.value];
         var resp = AlexaResponse;
 
@@ -156,7 +156,7 @@
     }
 
 
-    function HandlerUpPhase(game, intent) {
+    function HandleUpPhase(game, intent) {
         var player = game.players[intent.slots.Player.value];
         var resp = AlexaResponse;
 
@@ -173,7 +173,7 @@
     }
 
 
-    function HandlerGetScore(game, intent) {
+    function HandleGetScore(game, intent) {
         var player = game.players[intent.slots.Player.value];
         var resp = AlexaResponse;
 
@@ -193,7 +193,7 @@
     }
 
 
-    function HandlerGetLeader(game, intent) {
+    function HandleGetLeader(game, intent) {
         var player = game.getLeadPlayer();
         var resp = AlexaResponse;
 
@@ -213,7 +213,7 @@
     }
 
 
-    function HandlerGetPhaseInfo(game, intent) {
+    function HandleGetPhaseInfo(game, intent) {
         var resp = AlexaResponse;
         AddSpeech(resp, phaseScore.GetPhaseInfo(intent.slots.Phase.value));
         return resp;
